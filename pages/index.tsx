@@ -1,21 +1,59 @@
-import Head from 'next/head'
-import Image from "next/image"
+import Head from 'next/head';
+import React from "react";
+import { useSpring, Transition, animated } from "react-spring";
 import avatarImage from "../public/logo_bordered.png";
 import twitterIconImage from "../public/twitter_icon.png";
 import githubIconImage from "../public/github_icon.png";
 import meshiiruIconImage from "../public/meshiiru_icon.png";
 import AppLink from '../components/AppLink';
+import { getWindowSize } from '../util/WindowSize';
 
 export default function Home() {
+  const [isBlogAppear, setBlogAppearance] = React.useState(false);
+  const elm = React.useRef(null);
+  const openBlog = useSpring({
+    from: {
+      minHeight: "100vh",
+      padding: "0 0.2rem",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      width: "500px",
+      x: (getWindowSize().width - elm.current.getBoundingClientRect().width) / 2,
+      // marginLeft: "auto",
+      // marginRight: "auto",
+      backgroundColor: "white",
+    },
+    to: {
+      minHeight: "100vh",
+      padding: "0 0.2rem",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      // marginLeft: 0,
+      x:0,
+      width: "400px",
+      backgroundColor: "white",
+    },
+    reverse: isBlogAppear,
+    delay: 5
+  });
+
+  const toggleBlogAppearance = () => {
+    setBlogAppearance(isBlogAppear => !isBlogAppear)
+  }
+
   return (
-    <div className="container">
+    <animated.div style={openBlog} ref={elm}>
       <Head>
         <title>AKADA TEPPEI</title>
         <link rel="icon" href="/logo_squire.png" />
       </Head>
 
       <main>
-        <img src={avatarImage.src} width="200" height="154" />
+        <img src={avatarImage.src} width="200" height="154" onClick={toggleBlogAppearance} />
         <h1 className="title">
           Akada Teppei
         </h1>
@@ -168,6 +206,6 @@ export default function Home() {
           box-sizing: border-box;
         }
       `}</style>
-    </div>
+    </animated.div>
   )
 }
