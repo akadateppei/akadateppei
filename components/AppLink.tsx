@@ -1,11 +1,9 @@
-import Image from "next/image"
 import React from "react"
-import appstoreLingImage from "../public/appstore_link.svg"
 
 type Props = {
     name: string,
     description: string,
-    image: StaticImageData,
+    image: string,
     url: string
 }
 
@@ -13,7 +11,7 @@ const AppLink: React.FC<Props> = (props) => {
     return (
         <a href={props.url} className="card">
             <div className="left">
-                <Image src={props.image} width="100" height="100" />
+                <img src={props.image} width="100" height="100" />
             </div>
             <div className="right">
             <h3>{props.name}</h3>

@@ -4,7 +4,6 @@ import avatarImage from "../public/logo_bordered.png";
 import twitterIconImage from "../public/twitter_icon.png";
 import githubIconImage from "../public/github_icon.png";
 import meshiiruIconImage from "../public/meshiiru_icon.png";
-import WingAvatar from "../components/WingAvatar"
 import AppLink from '../components/AppLink';
 
 export default function Home() {
@@ -16,16 +15,16 @@ export default function Home() {
       </Head>
 
       <main>
-        <Image src={avatarImage} width="200" height="154" />
+        <img src={avatarImage.src} width="200" height="154" />
         <h1 className="title">
           Akada Teppei
         </h1>
         <div className="icons">
           <a href="https://twitter.com/potan2005">
-            <Image src={twitterIconImage} width="32" height="32"/>
+            <img src={twitterIconImage.src} width="32" height="32"/>
           </a>
           <a href="https://github.com/akadateppei">
-            <Image src={githubIconImage} width="32" height="32"/>
+            <img src={githubIconImage.src} width="32" height="32"/>
           </a>  
         </div>
 
@@ -33,7 +32,7 @@ export default function Home() {
           Works
         </h2>
         <div className="grid">
-          <AppLink name="メシイル" description="家族やカップルで晩御飯の予定を共有" image={meshiiruIconImage} url="https://itunes.apple.com/jp/app/%E3%83%A1%E3%82%B7%E3%82%A4%E3%83%AB/id1570150194" />
+          <AppLink name="メシイル" description="家族やカップルで晩御飯の予定を共有" image={meshiiruIconImage.src} url="https://itunes.apple.com/jp/app/%E3%83%A1%E3%82%B7%E3%82%A4%E3%83%AB/id1570150194" />
         </div>
 
         <h2>
