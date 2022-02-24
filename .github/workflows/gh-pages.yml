@@ -1,0 +1,49 @@
+name: github pages
+
+on:
+  push:
+    branches:
+    - develop
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+
+    # Node.js環境セットアップ
+    - name: setup node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '17.x'
+
+    # npm install の際にキャッシュを使うよう設定
+    - name: Cache dependencies
+      uses: actions/cache@v1
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: install
+      run: npm install --frozen-lockfile
+
+    # Next.jsビルド
+    - name: build
+      run: npm run build
+
+    # 静的なHTMLとしてNext.jsアプリを生成する
+    # プロジェクトルート/outに成果物生まれる
+    - name: export
+      run: npm run export
+
+    # Pagesは_から始まるディレクトリが見えないので、.nojekyllファイルをoutディレクトリに作る
+    - name: add nojekyll
+      run: touch ./out/.nojekyll
+
+    - name: deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./out
