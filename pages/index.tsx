@@ -5,6 +5,7 @@ import twitterIconImage from "../public/twitter_icon.png";
 import githubIconImage from "../public/github_icon.png";
 import meshiiruIconImage from "../public/meshiiru_icon.png";
 import AppLink from '../components/AppLink';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -27,7 +28,7 @@ export default function Home() {
             <img src={githubIconImage.src} width="32" height="32"/>
           </a>  
         </div>
-
+        
         <h2>
           Works
         </h2>
@@ -54,11 +55,33 @@ export default function Home() {
           </a>
         </p>
         <p className="description">
-          <a href="https://www.mech.nagoya-u.ac.jp/MICRO/">
+          <a href="https://www.engg.nagoya-u.ac.jp/school/mechanical/index.html">
             Bachelor of Mechanical and Aerospace Engineering<br />
             <span className="corpName"> @Nagoya University</span>
           </a>
         </p>
+
+        <h2>
+          Blogs
+        </h2>
+        <div className="blogLink">
+          <Link href="/blog">
+            <p className="description corpName">
+              <a>ぺぺペーぺぺーぺぺ (Daily Blog)</a>
+            </p>
+          </Link>
+        </div>
+        <div className="blogLink">
+          <Link href="/teck-blog">
+            <p className="description corpName">
+              <a>てぺてペテック (Tech Blog)</a>
+            </p>
+          </Link>
+        </div>
+
+        <h2>
+          Illustrations
+        </h2>
       </main>
 
       <style jsx>{`
@@ -91,6 +114,10 @@ export default function Home() {
         a {
           color: inherit;
           text-decoration: none;
+        }
+
+        p {
+          margin-block-start: 0.5em;
         }
 
         .title {
